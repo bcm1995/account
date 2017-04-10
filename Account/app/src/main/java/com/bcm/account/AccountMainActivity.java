@@ -44,6 +44,7 @@ public class AccountMainActivity extends AppCompatActivity {
                     }
                 }else{
                     Toast.makeText(getApplicationContext(),"Error:"+e.getMessage().toString(),Toast.LENGTH_SHORT).show();
+
                 }
             }
         });

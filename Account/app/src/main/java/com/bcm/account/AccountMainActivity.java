@@ -43,7 +43,7 @@ public class AccountMainActivity extends AppCompatActivity {
                         e1.printStackTrace();
                     }
                 }else{
-                    Toast.makeText(getApplicationContext(),e.getMessage().toString(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Error:"+e.getMessage().toString(),Toast.LENGTH_SHORT).show();
                 }
             }
         });

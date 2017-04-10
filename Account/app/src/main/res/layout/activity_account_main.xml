@@ -1,18 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_account_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.bcm.account.AccountMainActivity">
+    tools:context="com.bcm.account.AccountMainActivity"
+    android:orientation="vertical"
+    >
 
-    <TextView
-        android:id="@+id/tip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
-</RelativeLayout>
+    <com.bcm.account.tools.NoScrollViewPager
+        android:id="@+id/noscrollpager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <com.yinglan.alphatabs.AlphaTabsIndicator
+        android:id="@+id/alphaIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <com.yinglan.alphatabs.AlphaTabView
+            android:id="@+id/AlphaView1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            app:tabIconNormal="@mipmap/main_details_logo_gray"
+            app:tabIconSelected="@mipmap/main_details_logo_green"
+            app:tabText="明细"
+            app:tabTextSize="14sp"
+            app:textColorNormal="@color/black_3"
+            app:textColorSelected="@color/colorPrimary" />
+
+        <com.yinglan.alphatabs.AlphaTabView
+            android:id="@+id/AlphaView2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            app:tabIconNormal="@mipmap/main_wallet_logo_gray"
+            app:tabIconSelected="@mipmap/main_wallet_logo_green"
+            app:tabText="钱包"
+            app:tabTextSize="14sp"
+            app:textColorNormal="@color/black_3"
+            app:textColorSelected="@color/colorPrimary"  />
+
+        <com.yinglan.alphatabs.AlphaTabView
+            android:id="@+id/AlphaView3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            app:tabIconNormal="@mipmap/main_add"
+            app:tabIconSelected="@mipmap/main_add"
+            app:textColorNormal="#999999"
+            app:textColorSelected="@color/background" />
+
+        <com.yinglan.alphatabs.AlphaTabView
+            android:id="@+id/AlphaView4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            app:tabIconNormal="@mipmap/main_report_logo_gray"
+            app:tabIconSelected="@mipmap/main_report_logo_green"
+            app:tabText="报表"
+            app:tabTextSize="14sp"
+            app:textColorNormal="@color/black_3"
+            app:textColorSelected="@color/colorPrimary"  />
+
+        <com.yinglan.alphatabs.AlphaTabView
+            android:id="@+id/AlphaView5"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            app:tabIconNormal="@mipmap/main_self_logo_gray"
+            app:tabIconSelected="@mipmap/main_self_logo_green"
+            app:tabText="个人"
+            app:tabTextSize="14sp"
+            app:textColorNormal="@color/black_3"
+            app:textColorSelected="@color/colorPrimary"  />
+
+
+
+    </com.yinglan.alphatabs.AlphaTabsIndicator>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/line_gray" />
+
+</LinearLayout>

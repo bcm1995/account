@@ -11,5 +11,6 @@ public class AccountMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_main);
         Toast.makeText(getApplicationContext(),"!",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"hello world",Toast.LENGTH_SHORT).show();
     }
 }

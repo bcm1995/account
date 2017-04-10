@@ -1,8 +1,7 @@
 package com.example.init.myapplication;
 
-import android.support.v4.view.accessibility.AccessibilityManagerCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -12,5 +11,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toast.makeText(this,"hello world",Toast.LENGTH_LONG).show();
+        Toast.makeText(this,"hello world1",Toast.LENGTH_LONG).show();
     }
 }

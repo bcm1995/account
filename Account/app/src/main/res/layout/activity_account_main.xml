@@ -8,9 +8,7 @@
     tools:context="com.bcm.account.AccountMainActivity"
     android:orientation="vertical"
     >
-    <include
-        layout="@layout/header_back"
-        ></include>
+
     <com.bcm.account.tools.NoScrollViewPager
         android:id="@+id/noscrollpager"
         android:layout_width="match_parent"

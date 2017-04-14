@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.bcm.account.R;
-import com.bcm.account.details.DetailsAdapter;
+import com.bcm.account.adapter.DetailsAdapter;
 import com.bcm.account.newsbean.DetailsBean;
 
 import java.util.ArrayList;

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/walletMain"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        >
+
+        <TextView
+            android:id="@+id/walletLeft"
+            android:layout_width="15dp"
+            android:layout_height="fill_parent"
+            android:background="@drawable/search_corner_left"
+            ></TextView>
+
+        <LinearLayout
+            android:id="@+id/walletRight"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:background="@drawable/search_corner_right"
+            android:paddingLeft="10dp"
+            android:layout_weight="1"
+            >
+            <ImageView
+                android:id="@+id/walletLogo"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/wallet_save_card"
+                android:layout_gravity="center"
+                ></ImageView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:paddingLeft="10dp"
+                android:layout_weight="1"
+                >
+                <TextView
+                    android:id="@+id/walletType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="储蓄卡"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    />
+                <TextView
+                    android:id="@+id/walletIntro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="储蓄卡余额"
+                    android:textSize="13sp"
+                    android:paddingTop="2dp"
+                    android:textColor="#f7f7f7"
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/walletMoney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-480.3"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:layout_gravity="center"
+                android:padding="10dp"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

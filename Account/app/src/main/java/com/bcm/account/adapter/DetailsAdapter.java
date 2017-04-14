@@ -1,4 +1,4 @@
-package com.bcm.account.details;
+package com.bcm.account.adapter;
 
 /**
  * Created by Bean on 2017/4/14.

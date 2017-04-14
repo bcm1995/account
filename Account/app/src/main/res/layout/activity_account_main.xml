@@ -8,12 +8,19 @@
     tools:context="com.bcm.account.AccountMainActivity"
     android:orientation="vertical"
     >
-
+    <include
+        layout="@layout/header_back"
+        ></include>
     <com.bcm.account.tools.NoScrollViewPager
         android:id="@+id/noscrollpager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/line_gray" />
 
     <com.yinglan.alphatabs.AlphaTabsIndicator
         android:id="@+id/alphaIndicator"
@@ -89,9 +96,6 @@
 
     </com.yinglan.alphatabs.AlphaTabsIndicator>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@color/line_gray" />
+
 
 </LinearLayout>

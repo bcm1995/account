@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <View
+        android:layout_width="1dp"
+        android:layout_height="25dp"
+        android:background="@color/line_gray"
+        android:layout_gravity="center"
+        ></View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@mipmap/details_smails"
+            android:layout_gravity="center"
+            ></ImageView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4月14日 10时41分"
+            android:textColor="@color/black_3"
+            android:layout_gravity="center"
+            android:paddingTop="5dp"
+            android:paddingBottom="2dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="你开启了家庭记账的旅程"
+            android:layout_gravity="center"
+            android:textColor="@color/black_3"
+            android:paddingBottom="15dp"
+            />
+    </LinearLayout>
+</LinearLayout>

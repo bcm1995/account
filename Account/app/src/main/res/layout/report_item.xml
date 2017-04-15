@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="10dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            >
+
+        <ImageView
+            android:id="@+id/rLogo"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@mipmap/icon_water"
+            android:layout_gravity="center"
+            android:padding="2dp"
+
+            />
+            <TextView
+                android:id="@+id/rWay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="一般"
+                android:textColor="@color/black_2"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_gravity="center"
+            >
+
+            <TextView
+                android:id="@+id/rMoneyRate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="19%"
+                android:textColor="@color/black_2"
+                android:layout_gravity="center"
+                android:textSize="16sp"
+                ></TextView>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="right"
+            android:paddingRight="10dp"
+            >
+
+            <TextView
+                android:id="@+id/rMoney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="244"
+                android:textSize="20sp"
+                android:textColor="@color/black_1"
+                android:layout_gravity="center"
+                android:gravity="center"
+                ></TextView>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

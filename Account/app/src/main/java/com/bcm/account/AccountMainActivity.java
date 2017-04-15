@@ -58,6 +58,7 @@ public class AccountMainActivity extends FragmentActivity {
         getDataFromBmob();
         initData();
     }
+
     private void bindView(){
 //        Tip = (TextView) findViewById(R.id.tip);
     }

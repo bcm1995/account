@@ -24,12 +24,6 @@
                 android:layout_width="match_parent"
                 android:src="@mipmap/ic_launcher"
                 android:scaleType="centerCrop"/>
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@mipmap/person_camera"
-                android:layout_gravity="bottom|right"
-                />
         </FrameLayout>
     </LinearLayout>
         <LinearLayout

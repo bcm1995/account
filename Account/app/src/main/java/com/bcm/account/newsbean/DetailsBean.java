@@ -10,7 +10,10 @@ public class DetailsBean  {
     // 账目方式 mIn -- 收入 mOut -- 支付
     public String way;
     // 账目类型
-    public String type;
+    public int type;
     // 日期
     public String day;
+    // 日期对应Money
+    public String daysInMoney;
+    public String daysOutMoney;
 }

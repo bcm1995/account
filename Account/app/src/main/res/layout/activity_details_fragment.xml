@@ -50,9 +50,10 @@
                 android:textColor="#404040" />
 
             <TextView
+                android:id="@+id/allInTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1068.00"
+                android:text="--"
                 android:textColor="#606060"></TextView>
         </LinearLayout>
 
@@ -97,9 +98,10 @@
                     android:textColor="#404040" />
 
                 <TextView
+                    android:id="@+id/allOutTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1068.00"
+                    android:text="--"
                     android:textColor="#606060"></TextView>
             </LinearLayout>
         </LinearLayout>

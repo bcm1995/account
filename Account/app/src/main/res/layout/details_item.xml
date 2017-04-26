@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical">
-
     <LinearLayout
         android:id="@+id/dayLayout"
         android:layout_width="match_parent"
@@ -12,27 +11,43 @@
         android:layout_gravity="center"
         android:visibility="gone"
         android:orientation="vertical">
+    <View
+        android:layout_width="1dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:background="@color/line_gray"></View>
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:background="@color/line_gray"></View>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_weight="1"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <TextView
+                android:id="@+id/dayInText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:paddingRight="20dp"
-                android:textColor="@color/black_2"
-                android:text="1000.00收入" />
+                android:layout_marginLeft="20dp"
+                android:text=""
+                android:textColor="@color/black_1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/day"
@@ -41,21 +56,43 @@
                 android:layout_gravity="center"
                 android:background="@drawable/circle_gray"
                 android:gravity="center"
-                android:text="10日"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:textColor="@color/black_2"
+
+                android:textColor="@color/black_1"
                 android:textSize="12sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textColor="@color/black_2"
-                android:paddingLeft="20dp"
-                android:text="1000.00收入" />
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/dayOutText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:text=""
+
+                    android:textColor="@color/black_1" />
+
+            </LinearLayout>
+
         </LinearLayout>
+
     </LinearLayout>
+        </LinearLayout>
 
     <View
         android:layout_width="1dp"
@@ -85,7 +122,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:text="1068.00 收入"
+                android:text=""
                 android:textColor="@color/black_2" />
         </LinearLayout>
 
@@ -95,14 +132,14 @@
 
             android:orientation="vertical">
 
-            <TextView
+            <ImageView
                 android:id="@+id/moneyType"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
                 android:background="@drawable/circle_choiced"
                 android:gravity="center"
-                android:text="4月"
+
                 android:textColor="@color/white"
                 android:textSize="12sp" />
 
@@ -129,7 +166,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="20dp"
-                    android:text="支出 188.0"
+                    android:text=""
                     android:textColor="@color/black_2" />
 
             </LinearLayout>

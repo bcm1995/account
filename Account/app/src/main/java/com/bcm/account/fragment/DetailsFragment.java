@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.bcm.account.R;
 import com.bcm.account.adapter.DetailsAdapter;
 import com.bcm.account.bmobbean.ABill;
+import com.bcm.account.bmobbean.myUser;
 import com.bcm.account.newsbean.DetailsBean;
 import com.bcm.account.tools.DataCenter;
 
@@ -43,11 +44,14 @@ public class DetailsFragment extends Fragment {
     DecimalFormat df = new DecimalFormat("0.00");
     private TextView AllInTextView;
     private TextView AllOutTextView;
+    private myUser user;
+    private String user_id;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_details_fragment, null);
         bindView();
-//        initData();
+        user = myUser.getCurrentUser(myUser.class);
+        user_id = user.getObjectId();
         getDateFromBmob();
         return view;
     }
@@ -79,7 +83,7 @@ public class DetailsFragment extends Fragment {
             adapter = new DetailsAdapter(getActivity(), detailsBeanList);
             mListView.setAdapter(adapter);
         } else {
-            adapter.notifyDataSetChanged();
+            adapter.changeDate(detailsBeanList);
         }
 
     }
@@ -126,9 +130,11 @@ public class DetailsFragment extends Fragment {
     }
 
     // 获取数据
-    private void getDateFromBmob() {
+    public  void getDateFromBmob() {
+//        Toast.makeText(getActivity(),"获取数据",Toast.LENGTH_SHORT).show();
         BmobQuery<ABill> query = new BmobQuery("ABill");
-        query.order("-bill_date");
+        query.addWhereEqualTo("user_id",user_id);
+        query.order("-createdAt");
 //        query.order("-createdAt");
         detailsBeanList = new ArrayList<>();
         query.findObjectsByTable(new QueryListener<JSONArray>() {

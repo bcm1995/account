@@ -15,6 +15,7 @@
         android:background="@color/background">
 
 
+
         <TextView
             android:id="@+id/header_title"
             android:layout_width="wrap_content"

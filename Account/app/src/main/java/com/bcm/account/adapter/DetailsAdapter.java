@@ -57,6 +57,11 @@ public class DetailsAdapter extends BaseAdapter {
         return position;
     }
 
+    public void changeDate(List<DetailsBean> list){
+        this.mList = list;
+        this.notifyDataSetChanged();
+    }
+
     public View getView(int position, View view, ViewGroup parent) {
 
         if (position < mList.size()) {

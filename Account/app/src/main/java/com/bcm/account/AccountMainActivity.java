@@ -19,6 +19,7 @@ import com.bcm.account.fragment.DetailsFragment;
 import com.bcm.account.fragment.ReportFragment;
 import com.bcm.account.fragment.SelfFragment;
 import com.bcm.account.fragment.WalletFragment;
+import com.bcm.account.tools.InterfaceCenter;
 import com.bcm.account.tools.NoScrollViewPager;
 import com.yinglan.alphatabs.AlphaTabView;
 import com.yinglan.alphatabs.AlphaTabsIndicator;
@@ -36,7 +37,7 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.QueryListener;
 
-public class AccountMainActivity extends FragmentActivity {
+public class AccountMainActivity extends FragmentActivity implements InterfaceCenter.refreshListener{
     private TextView Tip;
     private AlphaTabView tabView1, tabView2,tabView3,tabView4, tabView5;
     protected int mWidth;
@@ -57,6 +58,7 @@ public class AccountMainActivity extends FragmentActivity {
         bindView();
         getDataFromBmob();
         initData();
+        InterfaceCenter.setInterface(this);
     }
 
     private void bindView(){
@@ -120,6 +122,17 @@ public class AccountMainActivity extends FragmentActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void refreshDetail() {
+//        Toast.makeText(getApplicationContext(),"activity",Toast.LENGTH_SHORT).show();
+        detailsFragment.getDateFromBmob();
+    }
+
+    @Override
+    public void refreshWallet() {
+
     }
 
     private class MainAdapter extends FragmentPagerAdapter {

@@ -58,6 +58,15 @@ public class WalletAdapter extends BaseAdapter {
         return position;
     }
 
+
+    // 改变数据源
+
+    public void changeDate(List<WalletBean> list){
+        this.mList = list;
+        this.notifyDataSetChanged();
+    }
+
+
     public View getView(int position, View view, ViewGroup parent) {
 
         ViewHolder viewHolder;
@@ -70,6 +79,7 @@ public class WalletAdapter extends BaseAdapter {
             viewHolder.walletType = (TextView) view.findViewById(R.id.walletType);
             viewHolder.walletIntro = (TextView) view.findViewById(R.id.walletIntro);
             viewHolder.walletLogo = (ImageView) view.findViewById(R.id.walletLogo);
+            viewHolder.walletMoney = (TextView) view.findViewById(R.id.walletMoney);
             view.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) view.getTag();
@@ -88,6 +98,7 @@ public class WalletAdapter extends BaseAdapter {
         rightColor.setColor(Color.parseColor(tagRight));
         // 设置Logo
         viewHolder.walletLogo.setImageResource(mList.get(position).Logo);
+        viewHolder.walletMoney.setText(mList.get(position).money);
         return view;
     }
 
@@ -99,5 +110,6 @@ public class WalletAdapter extends BaseAdapter {
         private TextView walletType;
         private TextView walletIntro;
         private ImageView walletLogo;
+        private TextView walletMoney;
     }
 }

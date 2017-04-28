@@ -88,7 +88,7 @@ public class DetailsAdapter extends BaseAdapter {
             } else if (way.equals("out")) {
                 viewHolder.moneyInNum.setVisibility(View.INVISIBLE);
                 viewHolder.moneyType.setImageResource(mList.get(position).type);
-                viewHolder.moneyOutNum.setText(mList.get(position).money+" 支出");
+                viewHolder.moneyOutNum.setText("支出 "+mList.get(position).money);
             }
             // 是否需要日期
             if(NeedTitle(position)){

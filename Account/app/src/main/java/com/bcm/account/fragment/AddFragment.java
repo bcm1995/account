@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import com.bcm.account.R;
 import com.bcm.account.adapter.IconAdapter;
 import com.bcm.account.bmobbean.ABill;
+import com.bcm.account.bmobbean.AWallet;
 import com.bcm.account.bmobbean.myUser;
 import com.bcm.account.newsbean.IconBean;
 import com.bcm.account.tools.DataCenter;
@@ -31,6 +33,7 @@ import java.util.List;
 
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 /**
  * Created by Bean on 2017/4/10.
@@ -196,13 +199,14 @@ public class AddFragment extends Fragment {
         }
         Float moneyFlo = Float.parseFloat(moneyStr);
         String money =   df.format(moneyFlo)+"";
-        insertMoneyToBmob(wallet_type,money,bill_types,bill_logos, TimeCenter.getCurrenceDate());
+        updateWallet(wallet_type,bill_types,money,bill_logos,TimeCenter.getCurrenceDate());
+//        insertMoneyToBmob(wallet_type,money,bill_types,bill_logos, );
 
     }
 
     // 插入钱数
 
-    private void insertMoneyToBmob(String wallet_type,String bill_money,String bill_type,String logo,String date){
+    private void insertMoneyToBmob(final String wallet_type, String bill_money, String bill_type, String logo, String date, final String total){
         ABill aBill = new ABill();
         aBill.setWallet_type(wallet_type);
         aBill.setBill_type(bill_type);
@@ -217,10 +221,94 @@ public class AddFragment extends Fragment {
                     Toast.makeText(getActivity(),"记账成功",Toast.LENGTH_SHORT).show();
                     Money.setText("");
                     InterfaceCenter.irefresh.refreshDetail();
+                    updatedBmob(wallet_type,total);
                 }
             }
         });
     }
 
+    // 更新钱包的钱数
+
+    private void updateWallet(String type,String way,String money,String logo,String date){
+        DecimalFormat df = new DecimalFormat("0.00");
+        Float moneyF = Float.parseFloat(money);
+        // 现金钱包
+        if(type.equals("cash")){
+            if(way.equals("in")){
+                Float cashF = Float.parseFloat(DataCenter.cashMoney);
+                Float cashMoney = cashF + moneyF;
+                Log.i("现金余额：",cashMoney+"");
+                // 插入钱数
+                insertMoneyToBmob(type,money,way,logo,date,df.format(cashMoney));
+            }else if(way.equals("out")){
+                Float cashF = Float.parseFloat(DataCenter.cashMoney);
+                Float cashMoney = cashF - moneyF;
+                Log.i("现金余额：",cashMoney+"");
+                if(cashMoney>0){
+                    insertMoneyToBmob(type,money,way,logo,date,df.format(cashMoney));
+                }else{
+                    Toast.makeText(getActivity(),"钱包余额不足",Toast.LENGTH_SHORT).show();
+                }
+            }
+        }else if(type.equals("debit")){
+            if(way.equals("in")){
+                Float debitF = Float.parseFloat(DataCenter.debitMoney);
+                Float debitMoney = debitF + moneyF;
+                Log.i("储蓄卡余额：",debitMoney+"");
+                insertMoneyToBmob(type,money,way,logo,date,df.format(debitMoney));
+            }else if(way.equals("out")){
+                Float debitF = Float.parseFloat(DataCenter.debitMoney);
+                Float debitMoney = debitF - moneyF;
+                Log.i("储蓄卡余额：",debitMoney+"");
+                if(debitMoney>0){
+                    insertMoneyToBmob(type,money,way,logo,date,df.format(debitMoney));
+                }else{
+                    Toast.makeText(getActivity(),"钱包余额不足",Toast.LENGTH_SHORT).show();
+                }
+            }
+        }else if(type.equals("credit")){
+            // 信用卡支出，钱会增加
+            if(way.equals("out")){
+                Float creditF = Float.parseFloat(DataCenter.creditMoney);
+                Float creditMoney = creditF + moneyF;
+                Log.i("信用卡余额：",creditMoney+"");
+                insertMoneyToBmob(type,money,way,logo,date,df.format(creditMoney));
+            }else if(way.equals("in")){
+                // 信用卡收入，钱会减少
+                Float creditF = Float.parseFloat(DataCenter.creditMoney);
+                Float creditMoney = creditF - moneyF;
+                Log.i("信用卡余额：",creditMoney+"");
+                if(creditMoney>=0){
+                    insertMoneyToBmob(type,money,way,logo,date,df.format(creditMoney));
+                }else{
+                    Toast.makeText(getActivity(),"只需要￥"+DataCenter.creditMoney+"便可还清信用卡,请重新记账",Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
+
+    // 更新Bmob数据
+
+    private void updatedBmob(String type,String money){
+        AWallet wallet = new AWallet();
+        if(type.equals("cash")){
+            wallet.setCash_money(money);
+        }else if(type.equals("debit")){
+            wallet.setDebit_money(money);
+        }else if(type.equals("credit")){
+            wallet.setCredit_money(money);
+        }
+        wallet.update(DataCenter.walletId, new UpdateListener() {
+            @Override
+            public void done(BmobException e) {
+                if(e == null){
+                    Toast.makeText(getActivity(),"记账成功！",Toast.LENGTH_SHORT).show();
+                    InterfaceCenter.irefresh.refreshWallet();
+                }else{
+                    Toast.makeText(getActivity(),"更新钱包失败！",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
 
 }

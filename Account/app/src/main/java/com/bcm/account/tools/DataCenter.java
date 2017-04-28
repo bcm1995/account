@@ -128,6 +128,10 @@ public class DataCenter {
         return imgUri;
     }
 
-    ;
+    // 钱包钱数
+    public static String walletId = "";
+    public static String cashMoney = "";
+    public static String debitMoney = "";
+    public static String creditMoney = "";
 
 }

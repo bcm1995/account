@@ -121,8 +121,8 @@ public class DetailsFragment extends Fragment {
                     }
                 }
             }
-            detailsBeanList.get(i).daysInMoney = df.format(inCount) + "收入";
-            detailsBeanList.get(i).daysOutMoney = df.format(outCount) + "支出";
+            detailsBeanList.get(i).daysInMoney = df.format(inCount) + " 收入";
+            detailsBeanList.get(i).daysOutMoney = "支出 "+ df.format(outCount) ;
         }
         AllInTextView.setText(df.format(allInCount));
         AllOutTextView.setText(df.format(allOutCount));

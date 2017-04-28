@@ -132,7 +132,7 @@ public class AccountMainActivity extends FragmentActivity implements InterfaceCe
 
     @Override
     public void refreshWallet() {
-
+        walletFragment.getDataFromBmob();
     }
 
     private class MainAdapter extends FragmentPagerAdapter {

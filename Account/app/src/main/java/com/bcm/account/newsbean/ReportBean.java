@@ -15,4 +15,6 @@ public class ReportBean {
     public String rColor;
     // logo
     public int rLogo;
+    // logo String
+    public String rLogoStr;
 }

@@ -54,6 +54,11 @@ public class ReportAdapter extends BaseAdapter {
         return position;
     }
 
+    public void dataChange(List<ReportBean> lists){
+        this.mList = lists;
+        this.notifyDataSetChanged();
+    }
+
     public View getView(int position, View view, ViewGroup parent) {
 
         ViewHolder viewHolder;

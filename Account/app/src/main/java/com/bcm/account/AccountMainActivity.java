@@ -135,6 +135,11 @@ public class AccountMainActivity extends FragmentActivity implements InterfaceCe
         walletFragment.getDataFromBmob();
     }
 
+    @Override
+    public void refreshReport() {
+        reportFragment.getDataFromBmob();
+    }
+
     private class MainAdapter extends FragmentPagerAdapter {
 
         private List<Fragment> fragments = new ArrayList<>();

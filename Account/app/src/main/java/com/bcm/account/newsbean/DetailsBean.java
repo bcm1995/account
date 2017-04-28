@@ -16,4 +16,6 @@ public class DetailsBean  {
     // 日期对应Money
     public String daysInMoney;
     public String daysOutMoney;
+    public String logo;
+
 }

@@ -9,6 +9,7 @@ public class InterfaceCenter {
     public static interface  refreshListener{
         public void refreshDetail();
         public void refreshWallet();
+        public void refreshReport();
     }
     public static void setInterface(refreshListener refreshListener)
     {

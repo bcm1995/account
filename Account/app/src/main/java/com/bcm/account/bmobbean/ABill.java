@@ -61,4 +61,14 @@ public class ABill extends BmobObject{
     public String bill_money;
     public String bill_logo;
     public String bill_date;
+
+    public String getBill_month() {
+        return bill_month;
+    }
+
+    public void setBill_month(String bill_month) {
+        this.bill_month = bill_month;
+    }
+
+    public String bill_month;
 }

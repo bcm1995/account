@@ -49,7 +49,7 @@ public class AddFragment extends Fragment {
     private TextView Money;
     private TextView Add;
     private String bill_types;
-    private String bill_logos;
+    private String bill_logos="gongzi";
     private String[] inLogos = {"gongzi","shenghuo","linghua","jianzhi","touzi","jiangjin","baoxiao","xianjin","alipay","caipiao","qita"};
     private String[] outLogos = {"yiban","canyin","jiaotong","yinpin","suiguo","lingshi","maicai","yifu","riyong","huafei","hufu","fangzhu","dianying","taobao","suidian","kge"};
     DecimalFormat df = new DecimalFormat("0.00");
@@ -214,6 +214,7 @@ public class AddFragment extends Fragment {
         aBill.setBill_logo(logo);
         aBill.setBill_date(date);
         aBill.setUser_id(user_id);
+        aBill.setBill_month(date.substring(5,7));
         aBill.save(new SaveListener<String>() {
             @Override
             public void done(String s, BmobException e) {
@@ -221,6 +222,7 @@ public class AddFragment extends Fragment {
                     Toast.makeText(getActivity(),"记账成功",Toast.LENGTH_SHORT).show();
                     Money.setText("");
                     InterfaceCenter.irefresh.refreshDetail();
+                    InterfaceCenter.irefresh.refreshReport();
                     updatedBmob(wallet_type,total);
                 }
             }

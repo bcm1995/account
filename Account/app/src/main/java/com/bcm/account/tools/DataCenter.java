@@ -128,6 +128,126 @@ public class DataCenter {
         return imgUri;
     }
 
+    public static String  getImageText(String str) {
+        String imgText = "其他";
+        if (str.equals("gongzi")) {
+            return "工资";
+        } else if (str.equals("shenghuo")) {
+            return "生活费";
+        } else if (str.equals("linghua")) {
+            return "零花钱";
+        } else if (str.equals("jianzhi")) {
+            return "兼职";
+        } else if (str.equals("touzi")) {
+            return "投资";
+        } else if (str.equals("jiangjin")) {
+            return "奖金";
+        } else if (str.equals("baoxiao")) {
+            return "报销";
+        } else if (str.equals("xianjin")) {
+            return "现金";
+        } else if (str.equals("alipay")) {
+            return "支付宝";
+        } else if (str.equals("caipiao")) {
+            return "彩票";
+        } else if (str.equals("qita")) {
+            return "其他";
+        } else if (str.equals("yiban")) {
+            return "一般";
+        } else if (str.equals("canyin")) {
+            return "餐饮";
+        } else if (str.equals("jiaotong")) {
+            return "交通";
+        } else if (str.equals("yinpin")) {
+            return "饮品";
+        } else if (str.equals("suiguo")) {
+            return "水果";
+        } else if (str.equals("lingshi")) {
+            return "零食";
+        } else if (str.equals("maicai")) {
+            return "买菜";
+        } else if (str.equals("yifu")) {
+            return "衣服";
+        } else if (str.equals("riyong")) {
+            return "日用品";
+        } else if (str.equals("huafei")) {
+            return "话费";
+        } else if (str.equals("hufu")) {
+            return "护肤";
+        } else if (str.equals("fangzhu")) {
+            return "房租";
+        } else if (str.equals("dianying")) {
+            return "电影";
+        } else if (str.equals("taobao")) {
+            return "淘宝";
+        } else if (str.equals("suidian")) {
+            return "水费";
+        } else if (str.equals("kge")) {
+            return "K歌";
+        }
+        return imgText;
+    }
+
+    public static String getImageColor(String str){
+        String imgColor = "#39AB7A";
+        if (str.equals("gongzi")) {
+            return "#39AB7A";
+        } else if (str.equals("shenghuo")) {
+            return "#D0B95B";
+        } else if (str.equals("linghua")) {
+            return "#879274";
+        } else if (str.equals("jianzhi")) {
+            return "#5EB0C5";
+        } else if (str.equals("touzi")) {
+            return "#FE8002";
+        } else if (str.equals("jiangjin")) {
+            return "#ED9241";
+        } else if (str.equals("baoxiao")) {
+            return "#6566A9";
+        } else if (str.equals("xianjin")) {
+            return "#BD7876";
+        } else if (str.equals("alipay")) {
+            return "#2BC0FA";
+        } else if (str.equals("caipiao")) {
+            return "#FE6B6C";
+        } else if (str.equals("qita")) {
+            return "#A46A78";
+        } else if (str.equals("yiban")) {
+            return "#3DA6D5";
+        } else if (str.equals("canyin")) {
+            return "#BFAB55";
+        } else if (str.equals("jiaotong")) {
+            return "#A58880";
+        } else if (str.equals("yinpin")) {
+            return "#B42811";
+        } else if (str.equals("suiguo")) {
+            return "#6EAB6D";
+        } else if (str.equals("lingshi")) {
+            return "#EE4179";
+        } else if (str.equals("maicai")) {
+            return "#5CC090";
+        } else if (str.equals("yifu")) {
+            return "#FC567C";
+        } else if (str.equals("riyong")) {
+            return "#07ACE6";
+        } else if (str.equals("huafei")) {
+            return "#B386AF";
+        } else if (str.equals("hufu")) {
+            return "#D26AA7";
+        } else if (str.equals("fangzhu")) {
+            return "#AC244A";
+        } else if (str.equals("dianying")) {
+            return "#92654E";
+        } else if (str.equals("taobao")) {
+            return "#DB6130";
+        } else if (str.equals("suidian")) {
+            return "#45A7E4";
+        } else if (str.equals("kge")) {
+            return "#DD3131";
+        }
+        return imgColor;
+    }
+
     // 钱包钱数
     public static String walletId = "";
     public static String cashMoney = "";

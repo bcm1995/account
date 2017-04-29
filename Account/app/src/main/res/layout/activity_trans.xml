@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/header_back"></include>
+
+    <!--上级目录-->
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    >
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#f7f7f7"
+        >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/walletFromLayout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/walletFromLeft"
+                android:layout_width="15dp"
+                android:layout_height="fill_parent"
+                android:background="@drawable/search_corner_left"></TextView>
+
+            <LinearLayout
+                android:id="@+id/walletFromRight"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/search_corner_right"
+                android:paddingLeft="10dp">
+
+                <ImageView
+                    android:id="@+id/walletFromLogo"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/wallet_cash"></ImageView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp">
+
+                    <TextView
+                        android:id="@+id/walletFromType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="现金"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/walletFromMoney"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="right"
+                    android:padding="10dp"
+                    android:layout_weight="1"
+                    android:hint="0.00"
+                    android:textColorHint="#ffffff"
+                    android:textColor="@color/white"
+                    android:background="@null"
+                    android:inputType="number|numberDecimal"
+                    android:textSize="25sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!--下级目录-->
+
+        <LinearLayout
+            android:id="@+id/walletToLayout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/walletToLeft"
+                android:layout_width="15dp"
+                android:layout_height="fill_parent"
+                android:background="@drawable/search_corner_left"></TextView>
+
+            <LinearLayout
+                android:id="@+id/walletToRight"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:background="@drawable/search_corner_right"
+                android:paddingLeft="10dp">
+
+                <ImageView
+                    android:id="@+id/walletToLogo"
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/wallet_cash"></ImageView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp">
+
+                    <TextView
+                        android:id="@+id/walletToType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="现金"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/walletToMoney"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="10dp"
+                    android:gravity="right"
+                    android:layout_weight="1"
+                    android:hint="0.00"
+                    android:inputType="number|numberDecimal"
+                    android:textColorHint="#ffffff"
+                    android:textColor="@color/white"
+                    android:background="@null"
+                    android:textSize="25sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/circle_choiced_white"
+            android:layout_gravity="center"
+            />
+        <ImageView
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:src="@mipmap/arrow_down"
+            android:layout_gravity="center"
+            android:background="@drawable/circle_choiced_gray"
+            />
+
+    </FrameLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:background="#e3e3e3"
+        ></View>
+    
+    <TextView
+        android:id="@+id/trans"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="转账"
+        android:textColor="@color/background"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@color/white"
+        android:padding="15dp"
+        android:textSize="16sp"
+        />
+
+</LinearLayout>

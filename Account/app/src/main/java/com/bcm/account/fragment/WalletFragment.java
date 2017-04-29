@@ -1,5 +1,6 @@
 package com.bcm.account.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bcm.account.R;
+import com.bcm.account.activity.TransActivity;
 import com.bcm.account.adapter.WalletAdapter;
 import com.bcm.account.bmobbean.AWallet;
 import com.bcm.account.bmobbean.myUser;
@@ -50,6 +52,8 @@ public class WalletFragment extends Fragment {
     private TextView total_left;
     // 计算钱数到小数点两位
     DecimalFormat df = new DecimalFormat("0.00");
+    // 转账
+    private TextView Trans;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_wallet_fragment, null);
@@ -58,6 +62,14 @@ public class WalletFragment extends Fragment {
         user = myUser.getCurrentUser(myUser.class);
         user_id = user.getObjectId();
         getDataFromBmob();
+        // 转账监听
+        Trans.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), TransActivity.class);
+                startActivityForResult(intent,1);
+            }
+        });
         return view;
     }
     // 绑定数据源
@@ -65,6 +77,7 @@ public class WalletFragment extends Fragment {
         mListView = (ListView) view.findViewById(R.id.listView);
         mListView.setDividerHeight(0);
         total_left = (TextView) view.findViewById(R.id.total_left);
+        Trans = (TextView) view.findViewById(R.id.confirm);
     }
     // showListView
     private void showListView(){
@@ -145,4 +158,18 @@ public class WalletFragment extends Fragment {
             }
         });
     }
+
+    // 回调获取数据
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case 1:
+                getDataFromBmob();
+                break;
+        }
+    }
 }
+

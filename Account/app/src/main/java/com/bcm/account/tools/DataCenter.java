@@ -128,6 +128,10 @@ public class DataCenter {
             return R.mipmap.icon_trans_in;
         }else if(str.equals("zhuanchu")){
             return R.mipmap.icon_trans_out;
+        }else if(str.equals("jieru")){
+            return R.mipmap.icon_money_in;
+        }else if(str.equals("jiechu")){
+            return  R.mipmap.icon_money_out;
         }
         return imgUri;
     }
@@ -192,6 +196,10 @@ public class DataCenter {
             return "转入";
         }else if(str.equals("zhuanchu")){
             return "转出";
+        }else if(str.equals("jieru")){
+            return "借入";
+        }else if(str.equals("jiechu")){
+            return "借出";
         }
         return imgText;
     }
@@ -261,5 +269,7 @@ public class DataCenter {
     public static String cashMoney = "";
     public static String debitMoney = "";
     public static String creditMoney = "";
+    public static String joinMoney ="";
+    public static String loanMoney ="";
 
 }

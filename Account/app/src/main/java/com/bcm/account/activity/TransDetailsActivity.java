@@ -113,7 +113,7 @@ public class TransDetailsActivity extends Activity {
     // 设置数字
     private void setNumber(Float num){
         TotalMoney.setFromAndEndNumber(0, num);
-        TotalMoney.setDuration(2000);
+        TotalMoney.setDuration(1500);
         TotalMoney.start();
     }
     // 计算类型

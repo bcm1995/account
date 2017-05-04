@@ -37,6 +37,8 @@
         <activity android:name=".self_fragment_page.activity_self_forget"></activity>
         <activity android:name=".activity.TransActivity"></activity>
         <activity android:name=".activity.TransDetailsActivity"></activity>
+        <activity android:name=".activity.TransInOutActivity"></activity>
+        <activity android:name=".activity.InOutEditActivity"></activity>
     </application>
 
 </manifest>

@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.bcm.account.R;
 import com.bcm.account.activity.TransDetailsActivity;
 import com.bcm.account.activity.TransActivity;
+import com.bcm.account.activity.TransInOutActivity;
 import com.bcm.account.adapter.WalletAdapter;
 import com.bcm.account.bmobbean.AWallet;
 import com.bcm.account.bmobbean.myUser;
@@ -76,10 +77,18 @@ public class WalletFragment extends Fragment {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getActivity(), TransDetailsActivity.class);
-                intent.putExtra("type",typeArray[i]);
-                intent.putExtra("color",rightColorArray[i]);
-                startActivity(intent);
+                if(i==0||i==3||i==4){
+                    Intent intent = new Intent(getActivity(), TransDetailsActivity.class);
+                    intent.putExtra("type",typeArray[i]);
+                    intent.putExtra("color",rightColorArray[i]);
+                    startActivity(intent);
+                }else {
+                    Intent intent = new Intent(getActivity(), TransInOutActivity.class);
+                    intent.putExtra("type",typeArray[i]);
+                    intent.putExtra("color",rightColorArray[i]);
+                    startActivity(intent);
+                }
+
             }
         });
         return view;
@@ -156,6 +165,8 @@ public class WalletFragment extends Fragment {
                             DataCenter.cashMoney = cash;
                             DataCenter.debitMoney = debit;
                             DataCenter.creditMoney = credit;
+                            DataCenter.joinMoney = join;
+                            DataCenter.loanMoney = loan;
                             showListView();
                         } catch (JSONException e1) {
                             e1.printStackTrace();

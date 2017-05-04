@@ -7,11 +7,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bcm.account.R;
+import com.bcm.account.activity.TransDetailsActivity;
 import com.bcm.account.activity.TransActivity;
 import com.bcm.account.adapter.WalletAdapter;
 import com.bcm.account.bmobbean.AWallet;
@@ -67,7 +69,17 @@ public class WalletFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), TransActivity.class);
+                intent.putExtra("type","cash");
                 startActivityForResult(intent,1);
+            }
+        });
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getActivity(), TransDetailsActivity.class);
+                intent.putExtra("type",typeArray[i]);
+                intent.putExtra("color",rightColorArray[i]);
+                startActivity(intent);
             }
         });
         return view;

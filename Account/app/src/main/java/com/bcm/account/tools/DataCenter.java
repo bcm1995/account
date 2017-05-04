@@ -124,6 +124,10 @@ public class DataCenter {
             return R.mipmap.icon_water;
         } else if (str.equals("kge")) {
             return R.mipmap.icon_kge;
+        } else if(str.equals("zhuanru")){
+            return R.mipmap.icon_trans_in;
+        }else if(str.equals("zhuanchu")){
+            return R.mipmap.icon_trans_out;
         }
         return imgUri;
     }
@@ -184,6 +188,10 @@ public class DataCenter {
             return "水费";
         } else if (str.equals("kge")) {
             return "K歌";
+        } else if(str.equals("zhuanru")){
+            return "转入";
+        }else if(str.equals("zhuanchu")){
+            return "转出";
         }
         return imgText;
     }

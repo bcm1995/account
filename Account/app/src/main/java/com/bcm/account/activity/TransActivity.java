@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
@@ -19,12 +20,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bcm.account.R;
+import com.bcm.account.bmobbean.ATrans;
 import com.bcm.account.bmobbean.AWallet;
+import com.bcm.account.bmobbean.myUser;
 import com.bcm.account.tools.DataCenter;
+import com.bcm.account.tools.TimeCenter;
 
 import java.text.DecimalFormat;
 
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 
 /**
@@ -53,7 +58,7 @@ public class TransActivity extends Activity {
     private String WFrom, WTo;
     // 计算钱数到小数点两位
     DecimalFormat df = new DecimalFormat("0.00");
-
+    private String user_id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +77,11 @@ public class TransActivity extends Activity {
                 finish();
             }
         });
+        Intent intent = getIntent();
+        String type = intent.getStringExtra("type");
+        resetColor();
+        initFrom(type);
+        user_id = myUser.getCurrentUser(myUser.class).getObjectId();
         //
         WalletFrom.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,6 +156,51 @@ public class TransActivity extends Activity {
             }
         });
     }
+
+    // 初始化来源
+
+    private void initFrom(String type){
+        WFrom = type;
+        int position = 0;
+        for(int i = 0 ; i < arrayWallet.length ; i++ ){
+            if(arrayWalletEng[i].equals(type)){
+                position = i;
+                break;
+            }
+        }
+        WalletFromName.setText(arrayWallet[position]);
+        WalletFromImg.setImageResource(arrayImg[position]);
+        // 设置左侧颜色
+        GradientDrawable leftColor = (GradientDrawable)
+                WalletFromLeft.getBackground();
+        leftColor.setColor(Color.parseColor(arrayLeftColor[position]));
+        // 设置右侧颜色
+        GradientDrawable rightColor = (GradientDrawable)
+                WalletFromRight.getBackground();
+        rightColor.setColor(Color.parseColor(arrayRightColor[position]));
+    }
+
+    // 重置颜色
+    private void resetColor(){
+        // 设置左侧颜色
+        GradientDrawable leftColor = (GradientDrawable)
+                WalletToLeft.getBackground();
+        leftColor.setColor(Color.parseColor("#2FB2E8"));
+        // 设置右侧颜色
+        GradientDrawable rightColor = (GradientDrawable)
+                WalletToRight.getBackground();
+        rightColor.setColor(Color.parseColor("#57C0EB"));
+
+        // 设置左侧颜色
+        GradientDrawable leftColor1 = (GradientDrawable)
+                WalletFromLeft.getBackground();
+        leftColor1.setColor(Color.parseColor("#e3e3e3"));
+        // 设置右侧颜色
+        GradientDrawable rightColor1 = (GradientDrawable)
+                WalletFromRight.getBackground();
+        rightColor1.setColor(Color.parseColor("#f7f7f7"));
+    }
+
 
     //绑定数据源
 
@@ -228,39 +283,56 @@ public class TransActivity extends Activity {
                 ToMoney = df.format(debit + transMoney) + "";
             }
             // 更新Bmob
-            updateWallet(WFrom, FromMoney, WTo, ToMoney);
+            updateWallet(WFrom, FromMoney, WTo, ToMoney,Money);
         }
     }
 
     // 更新用户账本
-    private void updateWallet(String fromType, String fromMoney, String toType, String toMoney) {
+    private void updateWallet(final String fromType, final String fromMoney, final String toType, String toMoney, final String money) {
         AWallet wallet = new AWallet();
+        String from = "";
+        String to = "";
         // 现金转到储蓄卡
         if (fromType.equals("cash") && toType.equals("debit")) {
+            from = "现金";
+            to = "储蓄卡";
             wallet.setCash_money(fromMoney);
             wallet.setDebit_money(toMoney);
         } else if (fromType.equals("cash") && toType.equals("credit")) {
+            from = "现金";
+            to = "信用卡";
             wallet.setCash_money(fromMoney);
             wallet.setCredit_money(toMoney);
         } else if (fromType.equals("debit") && toType.equals("cash")) {
+            from = "储蓄卡";
+            to = "现金";
             wallet.setDebit_money(fromMoney);
             wallet.setCash_money(toMoney);
         } else if (fromType.equals("debit") && toType.equals("credit")) {
+            from = "储蓄卡";
+            to = "信用卡";
             wallet.setDebit_money(fromMoney);
             wallet.setCredit_money(toMoney);
         } else if (fromType.equals("credit") && toType.equals("cash")) {
+            from = "信用卡";
+            to = "现金";
             wallet.setCredit_money(fromMoney);
             wallet.setCash_money(toMoney);
         } else if (fromType.equals("credit") && toType.equals("debit")) {
+            from = "信用卡";
+            to = "储蓄卡";
             wallet.setCredit_money(fromMoney);
             wallet.setDebit_money(toMoney);
         }
+        final String finalTo = to;
+        final String finalFrom = from;
         wallet.update(DataCenter.walletId, new UpdateListener() {
             @Override
             public void done(BmobException e) {
                 if (e == null) {
-                    finish();
-                    setResult(1);
+                    String month = TimeCenter.getCurrenceDate().substring(5,7);
+                    addTransRecord(fromType,"out","转出",month,money,"zhuanchu","转出到"+ finalTo);
+                    addTransRecord(toType,"in","转入",month,money,"zhuanru","来自"+ finalFrom);
                     Toast.makeText(getApplicationContext(), "转账成功", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getApplicationContext(), "错误", Toast.LENGTH_SHORT).show();
@@ -268,4 +340,34 @@ public class TransActivity extends Activity {
             }
         });
     }
+
+    // 记账
+
+    // 增加转账记录
+
+    private void addTransRecord(String wallet, String way, String name, String month, String money, String logo,String remark) {
+        ATrans trans = new ATrans();
+        trans.setUser_id(user_id);
+        trans.setTrans_logo(logo);
+        trans.setTrans_month(month);
+        trans.setTrans_name(name);
+        trans.setTrans_wallet(wallet);
+        trans.setTrans_way(way);
+        trans.setTrans_money(money);
+        trans.setTrans_remark(remark);
+        trans.save(new SaveListener<String>() {
+            @Override
+            public void done(String s, BmobException e) {
+                if (e == null) {
+                    Toast.makeText(getApplicationContext(), "转账记录成功", Toast.LENGTH_SHORT).show();
+                    finish();
+                    setResult(1);
+                } else {
+                    Toast.makeText(getApplicationContext(), "转账记录失败", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+
 }

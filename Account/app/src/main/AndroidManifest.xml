@@ -36,6 +36,7 @@
         <activity android:name=".self_fragment_page.activity_self_register_sms" />
         <activity android:name=".self_fragment_page.activity_self_forget"></activity>
         <activity android:name=".activity.TransActivity"></activity>
+        <activity android:name=".activity.TransDetailsActivity"></activity>
     </application>
 
 </manifest>

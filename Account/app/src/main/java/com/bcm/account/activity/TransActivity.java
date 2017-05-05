@@ -298,31 +298,43 @@ public class TransActivity extends Activity {
             to = "储蓄卡";
             wallet.setCash_money(fromMoney);
             wallet.setDebit_money(toMoney);
+            DataCenter.cashMoney = fromMoney;
+            DataCenter.debitMoney = toMoney;
         } else if (fromType.equals("cash") && toType.equals("credit")) {
             from = "现金";
             to = "信用卡";
             wallet.setCash_money(fromMoney);
             wallet.setCredit_money(toMoney);
+            DataCenter.cashMoney = fromMoney;
+            DataCenter.creditMoney = toMoney;
         } else if (fromType.equals("debit") && toType.equals("cash")) {
             from = "储蓄卡";
             to = "现金";
             wallet.setDebit_money(fromMoney);
             wallet.setCash_money(toMoney);
+            DataCenter.debitMoney = fromMoney;
+            DataCenter.cashMoney = toMoney;
         } else if (fromType.equals("debit") && toType.equals("credit")) {
             from = "储蓄卡";
             to = "信用卡";
             wallet.setDebit_money(fromMoney);
             wallet.setCredit_money(toMoney);
+            DataCenter.debitMoney = fromMoney;
+            DataCenter.creditMoney = toMoney;
         } else if (fromType.equals("credit") && toType.equals("cash")) {
             from = "信用卡";
             to = "现金";
             wallet.setCredit_money(fromMoney);
             wallet.setCash_money(toMoney);
+            DataCenter.creditMoney = fromMoney;
+            DataCenter.cashMoney = toMoney;
         } else if (fromType.equals("credit") && toType.equals("debit")) {
             from = "信用卡";
             to = "储蓄卡";
             wallet.setCredit_money(fromMoney);
             wallet.setDebit_money(toMoney);
+            DataCenter.creditMoney = fromMoney;
+            DataCenter.debitMoney = toMoney;
         }
         final String finalTo = to;
         final String finalFrom = from;

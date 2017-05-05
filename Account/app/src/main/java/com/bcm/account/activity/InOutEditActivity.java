@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.bcm.account.R;
 import com.bcm.account.bmobbean.AInOut;
+import com.bcm.account.bmobbean.ATrans;
 import com.bcm.account.bmobbean.AWallet;
 import com.bcm.account.bmobbean.myUser;
 import com.bcm.account.tools.DataCenter;
@@ -47,7 +48,7 @@ public class InOutEditActivity extends Activity {
     // 计算钱数到小数点两位
     DecimalFormat df = new DecimalFormat("0.00");
     //
-    private String logo, type, wallet_type;
+    private String logo, type, wallet_type,way;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,10 +68,12 @@ public class InOutEditActivity extends Activity {
             mMoneyTip.setText("借入金额");
             mDateTip.setText("借入日期");
             logo = "jieru";
+            way = "in";
         } else if (type.equals("loan")) {
             mMoneyTip.setText("借出金额");
             mDateTip.setText("借出日期");
             logo = "jiechu";
+            way = "out";
         }
         Back.setVisibility(View.VISIBLE);
         Back.setOnClickListener(new View.OnClickListener() {
@@ -140,12 +143,12 @@ public class InOutEditActivity extends Activity {
         } else {
             Float mon = Float.parseFloat(money);
             String moneys = df.format(mon);
-            addRecord(name, moneys, wallet_type, date, remark);
+            calcutorWallet(name,date,remark,type, wallet_type, moneys);
         }
     }
 
     // 添加
-    private void addRecord(String name, final String money, final String wallet, String date, String remark) {
+    private void addRecord(final String name, final String money, final String wallet, final String date, final String remark) {
         AInOut aInOut = new AInOut();
         aInOut.setUser_id(user_id);
         aInOut.setIo_date(date);
@@ -159,9 +162,8 @@ public class InOutEditActivity extends Activity {
             @Override
             public void done(String s, BmobException e) {
                 if (e == null) {
+                    addTransRecord(wallet,way,name,date.substring(5,7),money,logo);
                     Toast.makeText(getApplicationContext(), "添加成功", Toast.LENGTH_SHORT).show();
-                    calcutorWallet(type,wallet,money);
-
                 } else {
                     Toast.makeText(getApplicationContext(), "获取数据失败" + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -170,7 +172,7 @@ public class InOutEditActivity extends Activity {
     }
     // 计算钱包余额
 
-    private void calcutorWallet(String type, String wallet, String money) {
+    private void calcutorWallet(String name,String date,String remark,String type, String wallet, String money) {
         Float moneyF = Float.parseFloat(money);
         if (type.equals("join")) {
             Float joinMoney = Float.parseFloat(DataCenter.joinMoney);
@@ -178,47 +180,53 @@ public class InOutEditActivity extends Activity {
             if (wallet.equals("debit")) {
                 Float debitMoney = Float.parseFloat(DataCenter.debitMoney);
                 Float totalMoney = debitMoney + moneyF;
-                updatedBmob("debit",df.format(totalMoney)+"",df.format(joinTotal)+"");
+                updatedBmob("debit", df.format(totalMoney) + "", df.format(joinTotal) + "");
+                addRecord(name, money, wallet_type, date, remark);
             } else if (wallet.equals("credit")) {
                 Float creditMoney = Float.parseFloat(DataCenter.creditMoney);
-                if(moneyF>creditMoney){
-                    Toast.makeText(getApplicationContext(),"仅需￥"+creditMoney+"即可还清信用卡，请重新计算",Toast.LENGTH_SHORT).show();
+                if (moneyF > creditMoney) {
+                    Toast.makeText(getApplicationContext(), "仅需￥" + creditMoney + "即可还清信用卡，请重新计算", Toast.LENGTH_SHORT).show();
                     return;
-                }else{
+                } else {
                     Float totalMoney = creditMoney - moneyF;
-                    updatedBmob("credit",df.format(totalMoney)+"",df.format(joinTotal)+"");
+                    updatedBmob("credit", df.format(totalMoney) + "", df.format(joinTotal) + "");
+                    addRecord(name, money, wallet_type, date, remark);
                 }
 
             } else if (wallet.equals("cash")) {
                 Float cashMoney = Float.parseFloat(DataCenter.cashMoney);
                 Float totalMoney = cashMoney + moneyF;
-                updatedBmob("cash",df.format(totalMoney)+"",df.format(joinTotal)+"");
+                updatedBmob("cash", df.format(totalMoney) + "", df.format(joinTotal) + "");
+                addRecord(name, money, wallet_type, date, remark);
             }
         } else if (type.equals("loan")) {
             Float loanMoney = Float.parseFloat(DataCenter.loanMoney);
             Float loanTotal = loanMoney + moneyF;
             if (wallet.equals("debit")) {
                 Float debitMoney = Float.parseFloat(DataCenter.debitMoney);
-                if(moneyF>debitMoney){
-                    Toast.makeText(getApplicationContext(),"账户余额不足",Toast.LENGTH_SHORT).show();
+                if (moneyF > debitMoney) {
+                    Toast.makeText(getApplicationContext(), "账户余额不足", Toast.LENGTH_SHORT).show();
                     return;
-                }else{
+                } else {
                     Float totalMoney = debitMoney - moneyF;
-                    updatedBmob("debit",df.format(totalMoney)+"",df.format(loanTotal)+"");
+                    updatedBmob("debit", df.format(totalMoney) + "", df.format(loanTotal) + "");
+                    addRecord(name, money, wallet_type, date, remark);
                 }
 
             } else if (wallet.equals("credit")) {
                 Float creditMoney = Float.parseFloat(DataCenter.creditMoney);
                 Float totalMoney = creditMoney + moneyF;
-                updatedBmob("credit",df.format(totalMoney)+"",df.format(loanTotal)+"");
+                updatedBmob("credit", df.format(totalMoney) + "", df.format(loanTotal) + "");
+                addRecord(name, money, wallet_type, date, remark);
             } else if (wallet.equals("cash")) {
                 Float cashMoney = Float.parseFloat(DataCenter.cashMoney);
-                if(moneyF>cashMoney){
-                    Toast.makeText(getApplicationContext(),"账户余额不足",Toast.LENGTH_SHORT).show();
+                if (moneyF > cashMoney) {
+                    Toast.makeText(getApplicationContext(), "账户余额不足", Toast.LENGTH_SHORT).show();
                     return;
-                }else{
+                } else {
                     Float totalMoney = cashMoney - moneyF;
-                    updatedBmob("cash",df.format(totalMoney)+"",df.format(loanTotal)+"");
+                    updatedBmob("cash", df.format(totalMoney) + "", df.format(loanTotal) + "");
+                    addRecord(name, money, wallet_type, date, remark);
                 }
             }
         }
@@ -237,9 +245,9 @@ public class InOutEditActivity extends Activity {
             wallet.setCredit_money(money);
         }
 
-        if(type.equals("join")){
+        if (type.equals("join")) {
             wallet.setJoin_money(ioMoney);
-        }else if(type.equals("loan")){
+        } else if (type.equals("loan")) {
             wallet.setLoan_money(ioMoney);
         }
 
@@ -247,26 +255,57 @@ public class InOutEditActivity extends Activity {
             @Override
             public void done(BmobException e) {
                 if (e == null) {
-                    if (type.equals("cash")) {
+                    if (wallet_t.equals("cash")) {
                         DataCenter.cashMoney = money;
-                    } else if (type.equals("debit")) {
+                    } else if (wallet_t.equals("debit")) {
                         DataCenter.debitMoney = money;
-                    } else if (type.equals("credit")) {
+                    } else if (wallet_t.equals("credit")) {
                         DataCenter.creditMoney = money;
                     }
 
-                    if(type.equals("join")){
+                    if (type.equals("join")) {
                         DataCenter.joinMoney = ioMoney;
-                    }else if(type.equals("loan")){
+                    } else if (type.equals("loan")) {
                         DataCenter.loanMoney = ioMoney;
                     }
                     finish();
                     setResult(1);
-                    Toast.makeText(getApplicationContext(), "更新钱包成功！", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getApplicationContext(), "更新钱包成功！", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getApplicationContext(), "更新钱包失败！", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
+
+
+    // 增加转账记录
+
+    private void addTransRecord(String wallet, String way, String name, String month, String money, String logo) {
+        ATrans trans = new ATrans();
+        trans.setUser_id(user_id);
+        trans.setTrans_logo(logo);
+        trans.setTrans_month(month);
+        trans.setTrans_name(name);
+        trans.setTrans_wallet(wallet);
+        trans.setTrans_way(way);
+        trans.setTrans_money(money);
+        if(type.equals("join")){
+            trans.setTrans_remark("借入");
+        }else if(type.equals("loan")){
+            trans.setTrans_remark("借出");
+        }
+        trans.save(new SaveListener<String>() {
+            @Override
+            public void done(String s, BmobException e) {
+                if (e == null) {
+//                    Toast.makeText(getApplicationContext(), "转账记录成功", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "转账记录失败", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
 }
+

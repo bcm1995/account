@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.bcm.account.R;
 import com.bcm.account.adapter.ReportAdapter;
 import com.bcm.account.bmobbean.ABill;
+import com.bcm.account.bmobbean.myUser;
 import com.bcm.account.newsbean.DetailsBean;
 import com.bcm.account.newsbean.ReportBean;
 import com.bcm.account.tools.DataCenter;
@@ -79,10 +80,13 @@ public class ReportFragment extends Fragment {
     private String nowType = "in";
     private String nowMonth = "";
     private TextView nowMonthTextView;
+    private String user_id;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_report_fragment, null);
         bindView();
+        user_id = myUser.getCurrentUser(myUser.class).getObjectId();
         // 设置当前月份
         String nowDate = TimeCenter.getCurrenceDate();
         nowMonth = nowDate.substring(5,7);
@@ -106,6 +110,7 @@ public class ReportFragment extends Fragment {
                 getDataFromBmob();
             }
         });
+
         return view;
     }
 
@@ -174,6 +179,7 @@ public class ReportFragment extends Fragment {
         BmobQuery<ABill> query = new BmobQuery("ABill");
         query.addWhereEqualTo("bill_type",nowType);
         query.addWhereEqualTo("bill_month",nowMonth);
+        query.addWhereEqualTo("user_id",user_id);
         detailsBeanList = new ArrayList<>();
         query.findObjectsByTable(new QueryListener<JSONArray>() {
             @Override

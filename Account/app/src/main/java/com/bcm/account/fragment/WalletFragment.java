@@ -81,12 +81,12 @@ public class WalletFragment extends Fragment {
                     Intent intent = new Intent(getActivity(), TransDetailsActivity.class);
                     intent.putExtra("type",typeArray[i]);
                     intent.putExtra("color",rightColorArray[i]);
-                    startActivity(intent);
+                    startActivityForResult(intent,2);
                 }else {
                     Intent intent = new Intent(getActivity(), TransInOutActivity.class);
                     intent.putExtra("type",typeArray[i]);
                     intent.putExtra("color",rightColorArray[i]);
-                    startActivity(intent);
+                    startActivityForResult(intent,2);
                 }
 
             }
@@ -190,6 +190,9 @@ public class WalletFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode){
             case 1:
+                getDataFromBmob();
+                break;
+            case 2:
                 getDataFromBmob();
                 break;
         }

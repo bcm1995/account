@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bcm.account.AccountMainActivity;
 import com.bcm.account.bmobbean.myUser;
 import com.bcm.account.R;
 import cn.bmob.v3.exception.BmobException;
@@ -22,6 +23,7 @@ public class activity_self_signup extends AppCompatActivity {
     Button login;
     String username;
     String pass;
+    myUser user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -32,18 +34,24 @@ public class activity_self_signup extends AppCompatActivity {
         login=(Button)findViewById(R.id.sign_login);
         fpassword=(TextView)findViewById(R.id.signup_forgetpass);
         register=(TextView)findViewById(R.id.signup_register);
-
+        user = myUser.getCurrentUser(myUser.class);
+        if(user != null){
+            Intent intent = new Intent(getApplicationContext(), AccountMainActivity.class);
+            startActivity(intent);
+            finish();
+        }
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 username= id.getText().toString();
                 pass = password.getText().toString();
-
                 BmobUser.loginByAccount(username, pass, new LogInListener<myUser>() {
                     @Override
                     public void done(myUser user, BmobException e) {
                         if(user!=null){
                             Toast.makeText(getApplicationContext(),"success",Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(), AccountMainActivity.class);
+                            startActivity(intent);
                             finish();
                         }
                     }
@@ -64,8 +72,5 @@ public class activity_self_signup extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
-
     }
 }

@@ -15,12 +15,14 @@ import android.widget.TextView;
 import com.bcm.account.R;
 import com.bcm.account.newsbean.ReportBean;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class ReportAdapter extends BaseAdapter {
     private Context mContext;
     private List<ReportBean> mList;
-
+    // 计算钱数到小数点两位
+    DecimalFormat df = new DecimalFormat("0.00");
     public ReportAdapter(Context context, List<ReportBean> detailsBeanList) {
         this.mContext = context;
         this.mList = detailsBeanList;
@@ -74,7 +76,7 @@ public class ReportAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) view.getTag();
         }
             viewHolder.rMoneyRate.setText(mList.get(position).rRate);
-            viewHolder.rMoney.setText(mList.get(position).rMoney+"");
+            viewHolder.rMoney.setText(df.format(mList.get(position).rMoney)+"");
             viewHolder.rLogo.setImageResource(mList.get(position).rLogo);
             viewHolder.rWay.setText(mList.get(position).rWay);
         return view;

@@ -222,7 +222,7 @@ public class AddFragment extends Fragment {
             @Override
             public void done(String s, BmobException e) {
                 if (e == null) {
-                    Toast.makeText(getActivity(), "记账成功", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), "记账成功", Toast.LENGTH_SHORT).show();
                     Money.setText("");
                     InterfaceCenter.irefresh.refreshDetail();
                     InterfaceCenter.irefresh.refreshReport();
@@ -334,7 +334,7 @@ public class AddFragment extends Fragment {
             @Override
             public void done(String s, BmobException e) {
                 if (e == null) {
-                    Toast.makeText(getActivity(), "转账记录成功", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), "转账记录成功", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getActivity(), "转账记录失败", Toast.LENGTH_SHORT).show();
                 }

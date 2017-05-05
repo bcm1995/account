@@ -24,13 +24,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".AccountMainActivity">
+
+        </activity>
+        <activity android:name=".self_fragment_page.activity_self_signup">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".self_fragment_page.activity_self_signup" />
         <activity android:name=".self_fragment_page.activity_self_modify" />
         <activity android:name=".self_fragment_page.activity_self_register_phonenum" />
         <activity android:name=".self_fragment_page.activity_self_register_sms" />
@@ -39,6 +41,7 @@
         <activity android:name=".activity.TransDetailsActivity"></activity>
         <activity android:name=".activity.TransInOutActivity"></activity>
         <activity android:name=".activity.InOutEditActivity"></activity>
+        <activity android:name=".activity.MoneyEditActivity"></activity>
     </application>
 
 </manifest>

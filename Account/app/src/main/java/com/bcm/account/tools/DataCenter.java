@@ -132,6 +132,8 @@ public class DataCenter {
             return R.mipmap.icon_money_in;
         }else if(str.equals("jiechu")){
             return  R.mipmap.icon_money_out;
+        }else if (str.equals("pingzhang")){
+            return R.mipmap.icon_trans_input;
         }
         return imgUri;
     }
@@ -200,6 +202,8 @@ public class DataCenter {
             return "借入";
         }else if(str.equals("jiechu")){
             return "借出";
+        }else if(str.equals("pingzhang")){
+            return "平账";
         }
         return imgText;
     }

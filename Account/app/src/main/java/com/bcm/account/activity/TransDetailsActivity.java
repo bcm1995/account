@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -69,7 +70,7 @@ public class TransDetailsActivity extends Activity {
         myUser user = myUser.getCurrentUser(myUser.class);
         user_id = user.getObjectId();
         bindView();
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         String color = intent.getStringExtra("color");
         type = intent.getStringExtra("type");
         HeaderLayout.setBackgroundColor(Color.parseColor(color));
@@ -79,6 +80,7 @@ public class TransDetailsActivity extends Activity {
             @Override
             public void onClick(View view) {
                 finish();
+                setResult(2);
             }
         });
         getMoneyFromBmob(type);
@@ -93,6 +95,14 @@ public class TransDetailsActivity extends Activity {
                 Intent intent = new Intent(getApplicationContext(),TransActivity.class);
                 intent.putExtra("type",typeEng);
                 startActivityForResult(intent,1);
+            }
+        });
+        TotalMoney.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent1 = new Intent(getApplicationContext(),MoneyEditActivity.class);
+                intent1.putExtra("type",typeEng);
+                startActivityForResult(intent1,2);
             }
         });
     }
@@ -284,6 +294,23 @@ public class TransDetailsActivity extends Activity {
                 // 获取转账数据
                 getTransDetails(typeEng);
                 break;
+            case 2:
+                getMoneyFromBmob(type);
+                // 获取转账数据
+                getTransDetails(typeEng);
+                break;
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            finish();
+            setResult(2);
+            return false;
+        }else {
+            return super.onKeyDown(keyCode, event);
+        }
+
     }
 }

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -72,6 +73,7 @@ public class TransInOutActivity extends Activity {
             @Override
             public void onClick(View view) {
                 finish();
+                setResult(2);
             }
         });
         TransTip.setText(type+"总额");
@@ -112,6 +114,7 @@ public class TransInOutActivity extends Activity {
     private void showListView(List<IoBean> iList){
         adapter = new IoAdapter(getApplicationContext(),iList);
         TransListView.setAdapter(adapter);
+        TransListView.setDividerHeight(0);
     }
 
     // 设置数字
@@ -166,6 +169,7 @@ public class TransInOutActivity extends Activity {
         BmobQuery<AInOut> query = new BmobQuery("AInOut");
         query.addWhereEqualTo("user_id",user_id);
         query.addWhereEqualTo("io_type",type);
+        query.order("-createdAt");
         IoBeanList = new ArrayList<>();
         query.findObjectsByTable(new QueryListener<JSONArray>() {
             @Override
@@ -205,4 +209,17 @@ public class TransInOutActivity extends Activity {
                 break;
         }
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            finish();
+            setResult(2);
+            return false;
+        }else {
+            return super.onKeyDown(keyCode, event);
+        }
+
+    }
+
 }

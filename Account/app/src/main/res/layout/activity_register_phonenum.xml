@@ -15,7 +15,7 @@
             android:layout_marginLeft="6dp"
             android:text="＜ 登陆"
             android:textColor="#ffffff"
-            android:textSize="25sp"/>
+            android:textSize="18sp"/>
     </RelativeLayout>
 
     <LinearLayout
@@ -46,6 +46,7 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:textColor="#ffffff"
+            android:textCursorDrawable="@null"
             android:inputType="phone"
             android:hint="请输入手机号"
             android:textColorHint="#ffffff"/>

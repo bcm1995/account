@@ -2,10 +2,13 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/background"
     android:orientation="vertical"
     android:id="@+id/sign_all"
-    android:layout_height="match_parent">
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    >
     <TextView
         android:id="@+id/sign_hello"
         android:layout_marginTop="40dp"
@@ -58,10 +61,11 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:textColor="@color/black_2"
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:layout_marginLeft="20dp"
             android:textColorHint="@color/black_2"
-            android:hint="手机号"
+            android:hint="手机号/用户名"
+            android:textCursorDrawable="@null"
             android:background="@null"/>
         <TextView
             android:layout_height="0.1dp"
@@ -76,11 +80,12 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:textColor="@color/black_2"
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:layout_marginLeft="20dp"
             android:inputType="numberPassword"
             android:textColorHint="@color/black_2"
             android:hint="密码"
+            android:textCursorDrawable="@null"
             android:background="@null"/>
         <TextView
             android:layout_height="0.1dp"

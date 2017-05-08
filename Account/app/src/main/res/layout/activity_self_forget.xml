@@ -15,7 +15,7 @@
             android:layout_marginLeft="6dp"
             android:text="＜ 登陆"
             android:textColor="#ffffff"
-            android:textSize="25sp"/>
+            android:textSize="18sp"/>
     </RelativeLayout>
 
     <LinearLayout
@@ -41,6 +41,7 @@
             android:textColor="#ffffff"
             android:inputType="phone"
             android:hint="请输入手机号"
+            android:textCursorDrawable="@null"
             android:background="@null"
             android:cursorVisible="true"
             android:textColorHint="#ffffff"/>
@@ -65,6 +66,7 @@
             android:textSize="20sp"
             android:textColor="#ffffff"
             android:hint="请输入验证码"
+            android:textCursorDrawable="@null"
             android:textColorHint="#ffffff"
             android:layout_toRightOf="@+id/forget_yanzheng"
             android:layout_marginLeft="6dp"
@@ -122,6 +124,7 @@
             android:textColor="#ffffff"
             android:hint="请输入密码"
             android:textColorHint="#ffffff"
+            android:textCursorDrawable="@null"
             android:layout_toRightOf="@+id/forget_newpass"
             android:layout_marginLeft="6dp"
             android:background="@null" />
@@ -158,6 +161,7 @@
             android:textColor="#ffffff"
             android:hint="请输入再次输入"
             android:textColorHint="#ffffff"
+            android:textCursorDrawable="@null"
             android:layout_toRightOf="@+id/forget_passagain"
             android:layout_marginLeft="6dp"
             android:background="@null" />

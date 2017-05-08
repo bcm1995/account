@@ -49,7 +49,7 @@ public class SelfFragment extends Fragment {
     String imageUrl = "http://content.52pk.com/files/100623/2230_102437_1_lit.jpg";
     private View view;
     TextView logout, name, person_age, person_age_go, name_go, signdetails, gender, gender_go,
-            place, place_go;
+            place, place_go,title;
     ImageView logo;
 
     @Override
@@ -66,7 +66,10 @@ public class SelfFragment extends Fragment {
         place = (TextView) view.findViewById(R.id.person_place);
         place_go = (TextView) view.findViewById(R.id.person_place_go);
         logo = (ImageView) view.findViewById(R.id.person_logo);
+        title=(TextView)view.findViewById(R.id.header_title);
         setClickListener();
+        title.setText("个人");
+
 
         return view;
     }

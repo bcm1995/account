@@ -15,7 +15,7 @@
             android:layout_marginLeft="6dp"
             android:text="＜ 手机号"
             android:textColor="#ffffff"
-            android:textSize="25sp"/>
+            android:textSize="18sp"/>
     </RelativeLayout>
     <RelativeLayout
         android:layout_marginTop="40dp"
@@ -29,6 +29,7 @@
             android:textSize="20sp"
             android:textColor="#ffffff"
             android:hint="请输入验证码"
+            android:textCursorDrawable="@null"
             android:textColorHint="#ffffff"
             android:layout_toRightOf="@+id/register_yanzheng"
             android:layout_marginLeft="6dp"
@@ -76,6 +77,7 @@
             android:layout_width="wrap_content"
             android:textSize="20sp"
             android:textColor="#ffffff"
+            android:textCursorDrawable="@null"
             android:hint="请输入用户名"
             android:textColorHint="#ffffff"
             android:layout_toRightOf="@+id/register_name"
@@ -113,6 +115,7 @@
             android:textSize="20sp"
             android:textColor="#ffffff"
             android:hint="请输入密码"
+            android:textCursorDrawable="@null"
             android:textColorHint="#ffffff"
             android:layout_toRightOf="@+id/register_password"
             android:layout_marginLeft="6dp"

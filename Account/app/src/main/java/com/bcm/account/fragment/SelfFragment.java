@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -30,6 +31,7 @@ import com.bcm.account.R;
 import com.bcm.account.bmobbean.myUser;
 import com.bcm.account.self_fragment_page.activity_self_modify;
 import com.bcm.account.self_fragment_page.activity_self_signup;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.io.File;
 
@@ -50,7 +52,7 @@ public class SelfFragment extends Fragment {
     private View view;
     TextView logout, name, person_age, person_age_go, name_go, signdetails, gender, gender_go,
             place, place_go,title;
-    ImageView logo;
+    SimpleDraweeView logo;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -65,7 +67,7 @@ public class SelfFragment extends Fragment {
         gender_go = (TextView) view.findViewById(R.id.person_gender_go);
         place = (TextView) view.findViewById(R.id.person_place);
         place_go = (TextView) view.findViewById(R.id.person_place_go);
-        logo = (ImageView) view.findViewById(R.id.person_logo);
+        logo = (SimpleDraweeView) view.findViewById(R.id.person_logo);
         title=(TextView)view.findViewById(R.id.header_title);
         setClickListener();
         title.setText("个人");
@@ -231,6 +233,16 @@ public class SelfFragment extends Fragment {
         String age = (String) BmobUser.getObjectByKey("age");
         String details = (String) BmobUser.getObjectByKey("signDetails");
         String location = (String) BmobUser.getObjectByKey("location");
+        myUser currentuser = BmobUser.getCurrentUser(myUser.class);
+        BmobFile file = currentuser.getpic();
+        try
+        {
+            String url=file.getFileUrl();
+            logo.setImageURI(url);
+        }catch(NullPointerException e){
+
+        }
+
         signdetails.setText(details);
         person_age.setText(age);
         name.setText(username);
@@ -332,15 +344,21 @@ public class SelfFragment extends Fragment {
             public void done(BmobException e) {
                 if (e == null) {
                     myUser newUser = new myUser();
-                    newUser.setPic(bmobFile);
+                    newUser.setpic(bmobFile);
                     BmobUser bmobUser = BmobUser.getCurrentUser(myUser.class);
                     newUser.update(bmobUser.getObjectId(), new UpdateListener() {
                         @Override
                         public void done(BmobException e) {
                             if (e == null) {
-                                Bitmap bitmap = BitmapFactory.decodeFile(picPath);
-                                logo.setImageBitmap(bitmap);
-                                //Toast.makeText(getActivity(),"chenggong",Toast.LENGTH_SHORT).show();
+                                myUser currentuser = BmobUser.getCurrentUser(myUser.class);
+                                BmobFile file = currentuser.getpic();
+                                try
+                                {
+                                    String url=file.getFileUrl();
+                                    logo.setImageURI(url);
+                                }catch(NullPointerException exec){
+
+                                }
                             } else {
                                 Toast.makeText(getActivity(), "更新用户信息失败:" + e.getMessage(), Toast.LENGTH_SHORT).show();
                             }

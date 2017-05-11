@@ -46,11 +46,11 @@ public class myUser extends BmobUser {
         return this.location;
     }
 
-    public BmobFile getPic() {
-        return this.pic;
+    public BmobFile getpic() {
+        return pic;
     }
 
-    public void setPic(BmobFile pic) {
+    public void setpic(BmobFile pic) {
         this.pic = pic;
     }
 }

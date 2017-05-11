@@ -32,4 +32,5 @@ dependencies {
     compile 'com.yinglan.alphatabs:library:1.0.3'
     // 图表开源库
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
+    compile 'com.facebook.fresco:fresco:0.14.0'
 }

@@ -15,8 +15,10 @@ import android.widget.Toast;
 
 import com.bcm.account.AccountMainActivity;
 import com.bcm.account.R;
+import com.bcm.account.bmobbean.AWallet;
 import com.bcm.account.bmobbean.myUser;
 
+import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
 
@@ -59,10 +61,28 @@ public class activity_self_register_sms extends AppCompatActivity {
                     @Override
                     public void done(myUser user,BmobException e) {
                         if(e==null){
-                            Intent intent1 = new Intent(getApplicationContext(), AccountMainActivity.class);
+                            final Intent intent1 = new Intent(getApplicationContext(), activity_self_signup.class);
                             intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(intent1);
-                            Toast.makeText(getApplicationContext(),"登陆成功",Toast.LENGTH_SHORT).show();
+                            AWallet aWallet = new AWallet();
+                            aWallet.setCash_money("0.00");
+                            aWallet.setCredit_money("0.00");
+                            aWallet.setDebit_money("0.00");
+                            aWallet.setJoin_money("0.00");
+                            aWallet.setLoan_money("0.00");
+                            aWallet.setUser_id(BmobUser.getCurrentUser().getObjectId());
+                            aWallet.save(new SaveListener<String>() {
+                                @Override
+                                public void done(String objectId, BmobException e) {
+                                    if(e==null){
+                                        Toast.makeText(activity_self_register_sms.this, "success", Toast.LENGTH_SHORT).show();
+                                        finish();
+                                        BmobUser.logOut();
+                                        startActivity(intent1);
+                                    }else{
+                                        Log.i("bmob","失败："+e.getMessage()+","+e.getErrorCode());
+                                    }
+                                }
+                            });
                         }else{
                             Toast.makeText(getApplicationContext(),"失败:" + e.getMessage(),Toast.LENGTH_SHORT).show();
                         }

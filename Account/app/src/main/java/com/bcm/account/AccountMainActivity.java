@@ -21,6 +21,7 @@ import com.bcm.account.fragment.SelfFragment;
 import com.bcm.account.fragment.WalletFragment;
 import com.bcm.account.tools.InterfaceCenter;
 import com.bcm.account.tools.NoScrollViewPager;
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.yinglan.alphatabs.AlphaTabView;
 import com.yinglan.alphatabs.AlphaTabsIndicator;
 
@@ -54,6 +55,7 @@ public class AccountMainActivity extends FragmentActivity implements InterfaceCe
             getWindow().addFlags(
                     WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
+        Fresco.initialize(this);
         setContentView(R.layout.activity_account_main);
         bindView();
         getDataFromBmob();
